@@ -255,5 +255,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
         }
+
+        void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.CompareTag("ECTS"))
+            {
+                AudioSource otherAudio = other.gameObject.GetComponent<AudioSource>();
+                AudioSource.PlayClipAtPoint(otherAudio.clip, transform.position);
+                other.gameObject.SetActive(false);
+            }
+        }
     }
 }

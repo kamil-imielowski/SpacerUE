@@ -11,9 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/menuscene.unity
     guid: 7f0dcbcf2ed55024b9499e6aaa0602fb
-  - enabled: 1
-    path: Assets/Scenes/gamescene.unity
-    guid: a00547f219477d84297651e1b834a742
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/BogucickaCampus.unity
     guid: e3599fa13f72c8f41b196095e9f3bb2e

@@ -1,0 +1,1 @@
+﻿// This script has been replaced by LocalizeUI.

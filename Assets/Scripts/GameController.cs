@@ -1,33 +1,54 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    public GUIText ectsText;
-    private int ects;
+    public int startingEcts = 0; // startuje od 0 ects
+    public int currentEcts;
+    public Slider EctsSlider;
+    public AudioSource applauseAudioSource;
 
-    // Start is called before the first frame update
-    void Start()
+    bool isPass;
+
+    private void Awake()
     {
-        ects = 0;
-
+        currentEcts = startingEcts;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (isPass)
+        {
+            StartCoroutine(LevelChange());
+            isPass = false;
+        }
     }
 
-    public void AddEcts(int newEctsValue)
+    IEnumerator LevelChange()
     {
-        ects += newEctsValue;
-        UpdateEcts();
+        var player = GameObject.Find("FPSController");
+
+        AudioSource.PlayClipAtPoint(applauseAudioSource.clip, player.transform.position);
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene(0);
     }
 
-    void UpdateEcts()
+    public void AddEcts(int amount)
     {
-        ectsText.text = "Score: " + ects;
+        currentEcts += amount;
+        EctsSlider.value = currentEcts;
+        if(currentEcts >= 30 && !isPass)
+        {
+            Pass();
+        }
+    }
+
+    void Pass()
+    {
+        isPass = true;
     }
 }
